@@ -1,11 +1,13 @@
 
 import './App.css'
-import { HomeIcon } from './components/icons/HomeIcon'
 import { Sidebar } from './components/Sidebar'
 import { Button } from './components/ui/Button'
-import { SidebarSelector } from './components/ui/SidebarSelector'
+import { useContents } from './components/useContent'
+import { Card } from './components/ui/Card'
 
 function App() {
+
+  const { contents, loading } = useContents();
 
   return (
     <div className='bg-black w-screen h-screen text-white'>
@@ -14,7 +16,12 @@ function App() {
         <h2 className='text-2xl font-semibold'>MovieMan</h2>
         <Button size='sm' title='Login'/>
       </div>
-    <Sidebar/>
+      <div className='flex gap-5 overflow-hidden'>
+        <Sidebar/>
+        <div className='flex gap-4'>
+        {contents.map((x) => <Card image={x.imageurl[0]} title={x.title} />)}
+        </div>
+      </div>
     </div>
     </div>
   )
